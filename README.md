@@ -27,22 +27,43 @@ branch-1 ---A---B---C
 branch-2             D---E---F
 ```
 
-## Exercice 3
+<details>
+  <summary>Solution</summary>
 
-Target state of the branches:
+    git checkout branch-2
+    git rebase branch-1
+
+</details>
+
+## Exercice 2
+
+Move commits in `branch-2` on their new parent `B`:
 ```
 branch-1 ---A---B---C
-            \
-branch-2     D---E---F
-                 \
-branch-3          G---H
+                \
+branch-2         D---E---F
 ```
 
-## Bonus
+<details>
+  <summary>Hint 1</summary>
 
-Change `branch-3` parent to `B`. Notice that it kept commit `D` which originally was from `branch-2`:
-```
-branch-1 ---A---B---C
-                 \
-branch-3          D---G---H
-```
+    --onto
+
+</details>
+
+<details>
+  <summary>Hint 2</summary>
+
+    git rebase --onto <new-parent> <old-parent>
+
+</details>
+
+<details>
+  <summary>Solution</summary>
+
+    git checkout branch-2
+    git rebase --onto b7fb633 7b26bca7
+                        ^         ^
+                        B         A
+
+</details>
