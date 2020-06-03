@@ -67,3 +67,49 @@ branch-2         D---E---F
                         B         A
 
 </details>
+
+## Exercice 3
+
+Initial:
+```
+branch-1 ---A---B---C
+            \
+branch-2     D---E---F
+                     \
+branch-3              G---H
+```
+
+`git checkout branch-2`
+`git rebase branch-1`
+```
+branch-1   ---A-----B-----C
+              \           \
+branch-2       \           D'---E'---F'
+                \
+(old branch-2)   D---E---F
+                         \
+branch-3                  G---H
+```
+
+`git checkout branch-3`
+`git rebase --onto F' F`
+
+or
+
+`git rebase --onto F' F branch-3`
+
+or
+
+`git rebase --onto branch-2 branch-2@{1} branch-3`
+
+```
+branch-1 ---A---B---C
+                    \
+branch-2             D'---E'---F'
+                               \
+branch-3                        G---H
+```
+
+`branch-2@{1}` is the state of `branch-2` before the last change (i.e. before the rebase the rebase).
+
+Check `git reflog` for more information
