@@ -97,16 +97,16 @@ branch-2                   D'---E'---F'
                                      \
 branch-3                              D---E---F---G---H
 ```
-That's because even though D', E' and F' have the same name as before (the prime symbol is only added here for clearness), they changed slightly when fixing the conflicts from the branch-2 to branch-1 rebase. This means that they cannot be fast-forwarded: since they are not strictly identical, git cannot allow the possibility of loosing a change implicitely :
-```
-branch-1   ---A-----B-----C
-                          \
-branch-2                   D'---E'---F'
-                                     \
-branch-3                              G---H // <-- have we just lost D and E?
+That's because even though D', E' and F' have the same name as before (the prime symbol is only added here for clearness), they changed slightly when fixing the conflicts from the branch-2 to branch-1 rebase. This means that now they are completely distinct from D, E and F and they cannot be fast-forwarded anymore :
 ```
 
-But we know that it's okay to do so, because they were the same commits in a past life (before the rebase of branch-2 on branch-1). Thus we can explicitely tell git to put on top of the new branch-2 (`F'` or `branch-2` [1]) every commit from the old branch-2 (`F` or `branch-2@{1}` [2]) to the head of branch-3 (`H` or `branch-3`).
+branch-2                   D'---E'---F'
+                           |    |    | \
+                           |    |    |  \
+branch-3                   D ---E ---F---G---H // git cannot just guess that D, E and F are the same
+```
+
+But we know that it's okay to do so, because they were the same commits in a past life (before the rebase of branch-2 on branch-1). Thus we can explicitely tell git to put on top of the new branch-2 (`F'` or `branch-2` [1]) every commit from the old branch-2 (`F` or `branch-2@{1}` [2]) upto the head of branch-3 (`H` or `branch-3`).
 
 If you are on `branch-3` this can be done with `git rebase --onto branch-2 branch-2@{1}`
 
