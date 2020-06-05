@@ -22,6 +22,12 @@ git reset --hard origin/branch-3
 
 Rebase `branch-2` on top of `branch-1`:
 ```
+// Before
+branch-1 ---A---B---C
+            \
+branch-2     D---E---F
+
+// After
 branch-1 ---A---B---C
                     \
 branch-2             D---E---F
@@ -39,6 +45,12 @@ branch-2             D---E---F
 
 Move commits in `branch-2` on their new parent `B`:
 ```
+// Before
+branch-1 ---A---B---C
+            \
+branch-2     D---E---F
+
+// After
 branch-1 ---A---B---C
                 \
 branch-2         D---E---F
@@ -70,18 +82,16 @@ branch-2         D---E---F
 
 ## Exercice 3
 
-Initial:
+Let's change things up a bit by messing with out initial state: rebase `branch-2` on `branch1` as seen in [Exercice 1](#exercise-1), but this time let's keep track of `branch-3`:
 ```
+// Before
 branch-1 ---A---B---C
             \
 branch-2     D---E---F
                      \
 branch-3              G---H
-```
 
-`git checkout branch-2`
-`git rebase branch-1`
-```
+// After
 branch-1   ---A-----B-----C
               \           \
 branch-2       \           D'---E'---F'
@@ -89,7 +99,26 @@ branch-2       \           D'---E'---F'
 branch-3         D---E---F---G---H
 ```
 
-If you try to rebase branch-3 on branch-2 now, you will have to fix potential conflicts coming from B to F' (`REBASE 1/5`), before reaching  to this state:
+What we get is a bit odd: `branch-3` used to have `F` as a parent but now it is not connected to `branch-2` anymore.
+
+This exercise is about rebranching `branch-3` on `branch-2` so that no one would know that `branch-3` had its own life for a while. It should look like this:
+```
+// Before
+branch-1   ---A-----B-----C
+              \           \
+branch-2       \           D'---E'---F'
+                \
+branch-3         D---E---F---G---H
+
+// After
+branch-1 ---A---B---C
+                    \
+branch-2             D'---E'---F'
+                               \
+branch-3                        G---H
+```
+
+If you try to rebase `branch-3` on `branch-2` now, you will have to fix potential conflicts coming from `B` to `F'` (`REBASE 1/5`), before reaching to this state:
 ```
 branch-1   ---A-----B-----C
                           \
@@ -97,7 +126,8 @@ branch-2                   D'---E'---F'
                                      \
 branch-3                              D---E---F---G---H
 ```
-That's because even though D', E' and F' have the same name as before (the prime symbol is only added here for clearness), they changed slightly when fixing the conflicts from the branch-2 to branch-1 rebase. This means that now they are completely distinct from D, E and F and they cannot be fast-forwarded anymore :
+
+That's because even though `D'`, `E'` and `F'` have the same name as before (the prime `'` symbol is only added here for clearness), they changed slightly when fixing the conflicts from the `branch-2` to `branch-1` rebase. This means that now they are completely distinct from `D`, `E` and `F` and they cannot be fast-forwarded anymore :
 ```
 
 branch-2                   D'---E'---F'
@@ -106,7 +136,7 @@ branch-2                   D'---E'---F'
 branch-3                   D ---E ---F---G---H // git cannot just guess that D, E and F are the same
 ```
 
-But we know that it's okay to do so, because they were the same commits in a past life (before the rebase of branch-2 on branch-1). Thus we can explicitely tell git to put on top of the new branch-2 (`F'` or `branch-2` [1]) every commit from the old branch-2 (`F` or `branch-2@{1}` [2]) upto the head of branch-3 (`H` or `branch-3`).
+But we know that it's okay to do so, because they were the same commits in a past life (before the rebase of `branch-2` on `branch-1`). Thus we can explicitely tell git to put on top of the new `branch-2` (`F'` or `branch-2` [1]) every commit from the old `branch-2` (`F` or `branch-2@{1}` [2]) upto the head of `branch-3` (`H` or `branch-3`).
 
 If you are on `branch-3` this can be done with `git rebase --onto branch-2 branch-2@{1}`
 
