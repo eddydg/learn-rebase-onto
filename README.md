@@ -1,4 +1,8 @@
-# Practice your `git rebase --onto`
+# Practice your `git rebase`
+
+## Introduction
+
+Learn to rebase with git using this mock project.
 
 Initial state of the branches:
 ```
@@ -9,6 +13,21 @@ branch-2     D---E---F
 branch-3          G---H
 ```
 
+The content of `changelog.md` must always reflect the state of your current branch. For example, while on `branch-3` it will be:
+```
+Added in commit A
+Added in commit D
+Added in commit E
+Added in commit G
+Added in commit H
+```
+
+## Rules
+
+ - During a merge conflict you can only delete lines. You are not allowed to rearrange or write in it.
+
+## Tips
+
 You can use `git log --graph --oneline --branches=branch-*` to check your branches state at any time.
 
 After each exercice, don't forget to reset your branches to the initial state:
@@ -16,6 +35,15 @@ After each exercice, don't forget to reset your branches to the initial state:
 git reset --hard origin/branch-1
 git reset --hard origin/branch-2
 git reset --hard origin/branch-3
+```
+
+This can also be useful if you are completely lost in your branches state and want to restart on a clean plate.
+
+You will encounter merge conflicts in `changelog.md` after each rebase. They are necessary but don't worry you should be able to fix it by simply removing the conflict markers:
+```
+<<<<<<< HEAD
+and
+=======
 ```
 
 ## Exercice 1
