@@ -24,7 +24,12 @@ Added in commit H
 
 ## Rules
 
- - During a merge conflict you can only delete lines. You are not allowed to rearrange or write in it.
+ - During a merge conflict you can only delete the conflict marker lines. You are not allowed to rearrange or write in it.
+ ```
+// Those are the git conflict markers
+<<<<<<< HEAD
+=======
+```
 
 ## Tips
 
@@ -39,12 +44,7 @@ git reset --hard origin/branch-3
 
 This can also be useful if you are completely lost in your branches state and want to restart on a clean plate.
 
-You will encounter merge conflicts in `changelog.md` after each rebase. They are necessary but don't worry you should be able to fix it by simply removing the conflict markers:
-```
-<<<<<<< HEAD
-and
-=======
-```
+You will encounter merge conflicts in `changelog.md` after each rebase. Don't worry: they are necessary for the exercise and you should only need to remove the markers.
 
 ## Exercice 1
 
