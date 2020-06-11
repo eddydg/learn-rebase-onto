@@ -173,25 +173,22 @@ branch-3                        G---H
 <details>
   <summary>Solution</summary>
             
-  If you are on `branch-3` this can be done with `git rebase --onto branch-2 branch-2@{1}`
+  If you are on `branch-3` this can be done with
 
-  If you have done it correctly, you should only rebase 2 commits `(REBASE 1/2)` -- the commits we are moving `G` and `F` -- and the final state should not have any duplicated commit name.
+    git rebase --onto branch-2 branch-2@{1}
+
+  If you have done it correctly, you should only rebase 2 commits `(REBASE 1/2)` &mdash; the commits we are moving `G` and `F` &mdash; and the final state should not have any duplicated commit name.
+  
+  There are many other alternatives that translate to the same thing:
+  
+    git rebase --onto F' F
+
+  By expliciting the last argument, you can even call this from any branch:
+
+    git rebase --onto F' F branch-3
+    git rebase --onto branch-2 branch-2@{1} branch-3
+    
 </details>
-
-
-`git checkout branch-3`
-`git rebase --onto F' F`
-
-or
-
-`git rebase --onto F' F branch-3`
-
-or
-
-You can be more explicit with that last argument, letting you call the command from any branch you are currently on:
-`git rebase --onto branch-2 branch-2@{1} branch-3`
-
-
 
 
 # Notes
