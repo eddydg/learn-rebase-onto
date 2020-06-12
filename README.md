@@ -129,7 +129,7 @@ branch-3         D---E---F---G---H
 
 What we get is a bit odd: `branch-3` used to have `F` as a parent but now it is not connected to `branch-2` anymore.
 
-This exercise is about rebranching `branch-3` on `branch-2` so that no one would know that `branch-3` had its own life for a while. It should look like this:
+This exercise is about rebranching `branch-3` on `branch-2` __so that `branch-3` starts from `branch-2` just like before__. It should look like this:
 ```
 // Before
 branch-1   ---A-----B-----C
@@ -194,5 +194,5 @@ branch-3                        G---H
 # Notes
 [1] You can think of a branch as a simple pointer on the last commit of a bunch. That's why you can reference both `branch-2` and `F`
 
-[2] `branch-2@{1}` is the state of `branch-2` before the last change (i.e. before the rebase the rebase). 
+[2] `branch-2@{1}` is the state of `branch-2` before the last change (i.e. before the rebase). 
 Check `git reflog` for more information
