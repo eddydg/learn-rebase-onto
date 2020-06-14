@@ -1,10 +1,7 @@
 # Practice your `git rebase`
 
-## Introduction
+Learn to rebase with git using this mock project. There are 3 exercise of increasing difficulty. For each exercise, you must start from this initial state of the branches:
 
-Learn to rebase with git using this mock project.
-
-Initial state of the branches:
 ```
 branch-1 ---A---B---C
             \
@@ -13,14 +10,16 @@ branch-2     D---E---F
 branch-3          G---H
 ```
 
-The content of `changelog.md` must always reflect the state of your current branch. For example, while on `branch-3` it will be:
-```
-Added in commit A
-Added in commit D
-Added in commit E
-Added in commit G
-Added in commit H
-```
+To start, just clone the project and follow the instructions!
+
+## Table of Content
+
+[Rules](#rules)  
+[Tips](#tips)  
+[Exercise 1](#exercise-1)  
+[Exercise 2](#exercise-2)  
+[Exercise 3](#exercise-3)  
+[Notes](#notes)  
 
 ## Rules
 
@@ -46,7 +45,16 @@ This can also be useful if you are completely lost in your branches state and wa
 
 You will encounter merge conflicts in `changelog.md` after each rebase. Don't worry: they are necessary for the exercise and you should only need to remove the markers.
 
-## Exercice 1
+The content of `changelog.md` must always reflect the state of your current branch. For example, while on `branch-3` it will be:
+```
+Added in commit A
+Added in commit D
+Added in commit E
+Added in commit G
+Added in commit H
+```
+
+## Exercise 1
 
 Rebase `branch-2` on top of `branch-1`:
 ```
@@ -69,7 +77,7 @@ branch-2             D---E---F
 
 </details>
 
-## Exercice 2
+## Exercise 2
 
 Move commits in `branch-2` on their new parent `B`:
 ```
@@ -108,7 +116,7 @@ branch-2         D---E---F
 
 </details>
 
-## Exercice 3
+## Exercise 3
 
 Let's change things up a bit by messing with out initial state: rebase `branch-2` on `branch1` as seen in [Exercice 1](#exercise-1), but this time let's keep track of `branch-3`:
 ```
