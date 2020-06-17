@@ -104,7 +104,7 @@ branch-2         D---E---F
 <details>
   <summary>Hint 1</summary>
 
-    --onto
+  Git rebase accepts some very useful additional options. You should check the documentation.
 
 </details>
 
@@ -122,6 +122,9 @@ branch-2         D---E---F
     git rebase --onto b7fb633 7b26bca7
                         ^         ^
                         B         A
+  or also the following, from any branch:
+  
+    git rebase -onto b7fb633 7b26bca7 branch-2
 
 </details>
 
@@ -146,7 +149,7 @@ branch-3         D---E---F---G---H
 
 What we get is a bit odd: `branch-3` used to have `F` as a parent but now it is not connected to `branch-2` anymore.
 
-This exercise is about rebranching `branch-3` on `branch-2` __so that `branch-3` starts from `branch-2` just like before__. It should look like this:
+This exercise is about rebranching `branch-3` on `branch-2` so that __`branch-3` starts from `branch-2`__ just as before. It should look like this:
 ```
 // Before
 branch-1   ---A-----B-----C
@@ -175,6 +178,8 @@ branch-3                        G---H
     branch-3                              D---E---F---G---H
 
   This is not what we are looking for since `D', E', F'` and `D, E, F` are redondant. That happens because, even though `D'`, `E'` and `F'` have the same name as before (the prime `'` symbol is only added here for clearness), they changed slightly when fixing the conflicts from the `branch-2` to `branch-1` rebase. This means that they are now different from `D`, `E` and `F` and git cannot fast-forward them anymore.
+  
+  You can be explicit and tell git exactly what you want to do.
 
 </details>
 
