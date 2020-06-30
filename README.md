@@ -12,7 +12,7 @@ branch-2     D---E---F
 branch-3          G---H
 ```
 
-The objective for each exercise is to go from the `Before` state and try to reach the `After` state. There are many way to do this. Here we will use the power of [`git rebase`](https://git-scm.com/docs/git-rebase).
+The objective for each exercise is to go from the given `Before` state and try to reach the `After` state. There are many way to do this. Here we will use the power of [`git rebase`](https://git-scm.com/docs/git-rebase).
 
 ## Table of Content
 
@@ -25,7 +25,7 @@ The objective for each exercise is to go from the `Before` state and try to reac
 
 ## Rules
 
-During a merge conflict in you can only delete the _conflict marker lines_. Other than that, you are not allowed to add, remove or even rearrange anything else in the file.
+During a merge conflict you can only delete the _conflict marker lines_. Other than that, you are not allowed to add, remove or even rearrange anything else in the file.
 ```
 // Those are the git conflict markers you can delete
 <<<<<<< HEAD
@@ -34,7 +34,7 @@ During a merge conflict in you can only delete the _conflict marker lines_. Othe
 
 ## Tips
 
-You can use `git log --graph --oneline --branches=branch-*` to check your branches state at any time.
+`git log --graph --oneline --branches=branch-*` will show the state of the branches you need to track.
 
 After each exercice, don't forget to reset your branches to the initial state:
 ```bash
@@ -65,7 +65,7 @@ branch-3          G---H
 
 ## Exercise 1
 
-Rebase `branch-2` on top of `branch-1`:
+Update `branch-2` to start from the last commit (the `HEAD`) of `branch-1`:
 ```
 // Before
 branch-1 ---A---B---C
@@ -83,12 +83,16 @@ branch-2             D---E---F
 
     git checkout branch-2
     git rebase branch-1
+    
+    // or
+    
+    git rebase branch-1 branch-2
 
 </details>
 
 ## Exercise 2
 
-Move commits in `branch-2` on their new parent `B`:
+Update `branch-2` to start from commit `B` of `branch-1`:
 ```
 // Before
 branch-1 ---A---B---C
@@ -122,7 +126,7 @@ branch-2         D---E---F
     git rebase --onto b7fb633 7b26bca7
                         ^         ^
                         B         A
-  or also the following, from any branch:
+    // or
   
     git rebase -onto b7fb633 7b26bca7 branch-2
 
