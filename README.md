@@ -12,7 +12,7 @@ branch-2     D---E---F
 branch-3          G---H
 ```
 
-The objective for each exercise is to go from the given `Before` state and try to reach the `After` state. There are many way to do this. Here we will use the power of [`git rebase`](https://git-scm.com/docs/git-rebase).
+The objective for each exercise is to go from the given `Before` state and try to reach the `After` state. There are many ways to do this. Here we will use the power of [`git rebase`](https://git-scm.com/docs/git-rebase).
 
 ## Table of Content
 
@@ -49,6 +49,7 @@ You will encounter merge conflicts in `changelog.md` after each rebase. Don't wo
 
 The content of `changelog.md` must always reflect the state of your current branch. For example, while on `branch-3` it will be:
 ```
+// Content of changelog.md
 Added in commit A
 Added in commit D
 Added in commit E
@@ -134,7 +135,7 @@ branch-2         D---E---F
 
 ## Exercise 3
 
-Let's change things up a bit by messing with out initial state: rebase `branch-2` on `branch1` as seen in [Exercice 1](#exercise-1), but this time let's keep track of `branch-3`:
+Let's change things up a bit by messing with out initial state: start by rebasing `branch-2` on `branch1` just as seen in [Exercice 1](#exercise-1):
 ```
 // Before
 branch-1 ---A---B---C
@@ -143,7 +144,7 @@ branch-2     D---E---F
                      \
 branch-3              G---H
 
-// After
+// After (same as Exercise 1)
 branch-1   ---A-----B-----C
               \           \
 branch-2       \           D'---E'---F'
@@ -151,7 +152,7 @@ branch-2       \           D'---E'---F'
 branch-3         D---E---F---G---H
 ```
 
-What we get is a bit odd: `branch-3` used to have `F` as a parent but now it is not connected to `branch-2` anymore.
+Now take a look at what happens: `branch-3` used to have `F` as a parent but now it is not connected to `branch-2` anymore.
 
 This exercise is about rebranching `branch-3` on `branch-2` so that __`branch-3` starts from `branch-2`__ just as before. It should look like this:
 ```
@@ -218,7 +219,7 @@ branch-3                        G---H
 
 
 # Notes
-[1] You can think of a branch as a simple pointer on the last commit of a bunch. That's why you can reference both `branch-2` and `F`
+[1] You can think of a branch as a simple pointer on the last commit of a bunch. That is why you can reference both `branch-2` and `F`.
 
 [2] `branch-2@{1}` is the state of `branch-2` before the last change (i.e. before the rebase). 
-Check `git reflog` for more information
+Check `git reflog` for more information.
